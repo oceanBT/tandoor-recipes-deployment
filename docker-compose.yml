@@ -1,3 +1,4 @@
+version: "3"
 services:
   db_recipes:
     restart: always
@@ -26,7 +27,7 @@ services:
       - ./mediafiles:/media
     labels: # traefik example labels
       - "traefik.enable=true"
-      - "traefik.http.routers.recipes.rule=Host(`recipes.${TRAEFIK_LE_CERT_WILDCARD_DOMAIN_NAME}`"
+      - "traefik.http.routers.recipes.rule=Host(`recipes.${TRAEFIK_LE_CERT_WILDCARD_DOMAIN_NAME}`)"
       # access over entrypoint websecure
       - "traefik.http.routers.nextcloud.entrypoints=websecure"
       - "traefik.http.routers.nextcloud.tls=true"
@@ -37,13 +38,13 @@ services:
       - ./.env
     networks:
       - default
-      - traefik
+      - traefik_external
 
 networks:
   default:
-  traefik: # This is you external traefik network
+  traefik_external: # This is you external traefik network
     external: true
-
+    name: traefik
 volumes:
   nginx_config:
   staticfiles:
