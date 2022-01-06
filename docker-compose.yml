@@ -4,6 +4,8 @@ services:
     image: postgres:11-alpine
     volumes:
       - postgresql:/var/lib/postgresql/data
+    env_file:
+      - ./.env
   web_recipes:
     image: vabene1111/recipes
     restart: always
@@ -13,6 +15,8 @@ services:
       - ./mediafiles:/opt/recipes/mediafiles
     depends_on:
       - db_recipes
+    env_file:
+      - ./.env
   nginx_recipes:
     image: nginx:mainline-alpine
     restart: always
@@ -29,6 +33,8 @@ services:
       - "traefik.http.routers.nextcloud.tls.certresolver=myresolver"
     depends_on:
       - web_recipes
+    env_file:
+      - ./.env
     networks:
       - default
       - traefik
