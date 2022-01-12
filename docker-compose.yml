@@ -29,9 +29,9 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.recipes.rule=Host(`recipes.${TRAEFIK_LE_CERT_WILDCARD_DOMAIN_NAME}`)"
       # access over entrypoint websecure
-      - "traefik.http.routers.nextcloud.entrypoints=websecure"
-      - "traefik.http.routers.nextcloud.tls=true"
-      - "traefik.http.routers.nextcloud.tls.certresolver=myresolver"
+      - "traefik.http.routers.recipes.entrypoints=websecure"
+      - "traefik.http.routers.recipes.tls=true"
+      - "traefik.http.routers.recipes.tls.certresolver=myresolver"
     depends_on:
       - web_recipes
     env_file:
