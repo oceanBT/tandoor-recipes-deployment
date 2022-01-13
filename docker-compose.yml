@@ -27,6 +27,7 @@ services:
       - ./mediafiles:/media
     labels: # traefik example labels
       - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
       - "traefik.http.routers.recipes.rule=Host(`recipes.${TRAEFIK_LE_CERT_WILDCARD_DOMAIN_NAME}`)"
       # access over entrypoint websecure
       - "traefik.http.routers.recipes.entrypoints=websecure"
