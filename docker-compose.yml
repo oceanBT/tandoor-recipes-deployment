@@ -2,14 +2,17 @@ version: "3"
 services:
   db_recipes:
     restart: always
-    image: postgres:11-alpine
+    image: postgres:15-alpine
     volumes:
-      - postgresql:/var/lib/postgresql/data
+      - postgresql15:/var/lib/postgresql/data
     env_file:
       - ./.env
   web_recipes:
     image: vabene1111/recipes
     restart: always
+    #debug access via http://<server-ip>:8080
+    #ports:
+    # - 8080:8080
     volumes:
       - staticfiles:/opt/recipes/staticfiles
       - nginx_config:/opt/recipes/nginx/conf.d
@@ -21,6 +24,8 @@ services:
   nginx_recipes:
     image: nginx:mainline-alpine
     restart: always
+    # debug nginx
+    #command: [nginx-debug, '-g', 'daemon off;']
     volumes:
       - nginx_config:/etc/nginx/conf.d:ro
       - staticfiles:/static
@@ -49,4 +54,4 @@ networks:
 volumes:
   nginx_config:
   staticfiles:
-  postgresql:
+  postgresql15:
